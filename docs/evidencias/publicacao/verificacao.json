@@ -1,0 +1,27 @@
+{
+  "project": "profind-27554",
+  "url": "https://profind-27554.firebaseapp.com",
+  "checkedAt": "2026-10-23T12:36:07.072Z",
+  "checks": [
+    "Hosting HTTPS, sete rotas com fallback SPA e cabeçalhos de segurança",
+    "Página online: sete categorias, quatro larguras sem overflow, visitante bloqueado e nenhuma chamada a emuladores",
+    "Firebase real: cadastro client, perfil persistido, sessão após reload, login/logout e admin bloqueado",
+    "Firebase real: cadastro professional, perfil persistido, sessão após reload, login/logout e admin bloqueado",
+    "Regras reais: leitura cruzada/anônima, listagem e autoatribuição admin retornam HTTP 403",
+    "Recuperação: Firebase Auth real aceitou solicitação HTTP 200 e a tela confirmou; recebimento e consumo do link não verificados"
+  ],
+  "fixtures": [
+    {
+      "role": "client",
+      "email": "profind-sprint1-client-1792758967072@example.invalid",
+      "uid": "6XGFKV05NJNPz6Q3JzfEBc4UQlg2"
+    },
+    {
+      "role": "professional",
+      "email": "profind-sprint1-professional-1792758967072@example.invalid",
+      "uid": "RF358vFkFBRnBLJdMe686Q7928r2"
+    }
+  ],
+  "resetMailbox": "Pendente: responsável não dispõe de caixa de e-mail de teste.",
+  "success": true
+}

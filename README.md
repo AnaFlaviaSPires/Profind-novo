@@ -4,6 +4,8 @@ Fundação independente, criada do zero a partir do PRD 3.1 e da solicitação d
 
 Página comercial com exatamente sete categorias, cadastro de cliente e profissional, login, logout, recuperação de senha, persistência de sessão e autorização por ambiente. Não há operações de serviços, pagamentos, avaliações ou painéis completos.
 
+Repositório oficial: https://github.com/AnaFlaviaSPires/Profind-novo. Para continuar em outro computador, siga [RETOMADA_EM_OUTRO_COMPUTADOR.md](docs/RETOMADA_EM_OUTRO_COMPUTADOR.md).
+
 ## Executar
 
 Pré-requisitos: Node 24 LTS (ambiente validado), npm e Java 21 ou superior para os emuladores. Edge para os testes Playwright (`npx playwright install msedge` se necessário).
