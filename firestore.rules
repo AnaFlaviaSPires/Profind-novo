@@ -1,0 +1,47 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function owner(uid) { return request.auth != null && request.auth.uid == uid; }
+    function validUser(data) {
+      return data.keys().hasAll(['name', 'email', 'roles', 'createdAt', 'updatedAt'])
+        && data.keys().hasOnly(['name', 'email', 'roles', 'createdAt', 'updatedAt'])
+        && data.name is string && data.name.size() >= 2 && data.name.size() <= 100
+        && data.email == request.auth.token.email
+        && data.roles is list && data.roles.size() >= 1 && data.roles.size() <= 2
+        && data.roles.hasOnly(['client', 'professional'])
+        && data.roles.toSet().size() == data.roles.size()
+        && data.createdAt is timestamp && data.updatedAt == request.time;
+    }
+    function professionalExists(uid, roles) {
+      return !roles.hasAny(['professional'])
+        || existsAfter(/databases/$(database)/documents/professionalProfiles/$(uid));
+    }
+    match /users/{uid} {
+      allow get: if owner(uid);
+      allow list, delete: if false;
+      allow create: if owner(uid) && validUser(request.resource.data)
+        && request.resource.data.createdAt == request.time
+        && professionalExists(uid, request.resource.data.roles);
+      allow update: if owner(uid) && validUser(request.resource.data)
+        && request.resource.data.createdAt == resource.data.createdAt
+        && request.resource.data.email == resource.data.email
+        && request.resource.data.roles.hasAll(resource.data.roles)
+        && professionalExists(uid, request.resource.data.roles);
+    }
+    match /professionalProfiles/{uid} {
+      allow get: if owner(uid);
+      allow list, update, delete: if false;
+      allow create: if owner(uid)
+        && request.resource.data.keys().hasAll(['status', 'available', 'createdAt', 'updatedAt'])
+        && request.resource.data.keys().hasOnly(['status', 'available', 'createdAt', 'updatedAt'])
+        && request.resource.data.status == 'DRAFT'
+        && request.resource.data.available == false
+        && request.resource.data.createdAt == request.time
+        && request.resource.data.updatedAt == request.time
+        && getAfter(/databases/$(database)/documents/users/$(uid)).data.roles.hasAny(['professional']);
+    }
+    // Operational collections and admin data access belong to later sprints.
+    // Admin route authorization uses a trusted Auth custom claim, never a document field.
+    match /{document=**} { allow read, write: if false; }
+  }
+}
