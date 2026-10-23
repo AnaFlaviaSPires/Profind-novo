@@ -1,6 +1,6 @@
 # ProFind · Sprint 1 · v0.1.0
 
-Fundação independente, criada do zero a partir do PRD 3.1 e da solicitação de inicialização de 23/10/2026. Somente a Sprint 1 foi implementada. A publicação está pendente: a responsável informou que ainda não criou o projeto Firebase.
+Fundação independente, criada do zero a partir do PRD 3.1 e da solicitação de inicialização de 23/10/2026. Somente a Sprint 1 foi implementada. Publicada e verificada em https://profind-27554.firebaseapp.com. Consulte os [resultados da publicação](docs/PUBLICACAO_VALIDADA.md). A aprovação e a tag de congelamento continuam pendentes.
 
 Página comercial com exatamente sete categorias, cadastro de cliente e profissional, login, logout, recuperação de senha, persistência de sessão e autorização por ambiente. Não há operações de serviços, pagamentos, avaliações ou painéis completos.
 
